@@ -1,10 +1,9 @@
-from .. import utils
+from . import pbar
 import struct
 import format
 
 
 def pack(spectra_channels=None, config=None):
-    pbar = utils.pbar
     pbar.start('Generating an SPT file', show_header=True)
 
     fmt_str_block = list(format.SPT_FILE_FMT_STR_BLOCK)
