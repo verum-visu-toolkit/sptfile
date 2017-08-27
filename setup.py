@@ -10,7 +10,8 @@ setup(
     author_email='jczimm@jczimm.com',
     description='File format for output from verum visu analyzer',
     install_requires=[
-        'numpy==1.13.1'
+        'numpy==1.13.1',
+        'vvanalyzer'
     ]
 )
 

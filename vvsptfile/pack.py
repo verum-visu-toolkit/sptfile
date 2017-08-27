@@ -1,6 +1,8 @@
-from . import pbar
 import struct
 import format
+from vvanalyzer import cli
+
+pbar = cli.ProgressBarController()
 
 
 def pack(spectra_channels=None, config=None):
