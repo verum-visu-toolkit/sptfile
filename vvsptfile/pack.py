@@ -10,9 +10,7 @@ def pack(spectra_channels=None, config=None):
 
     fmt_str_block = list(format.SPT_FILE_FMT_STR_BLOCK)
     name_str = list('SPT')
-    # num channels, num spectra per channel, num freqs per spectrum, read rate
-    config_block = [config['num_channels'], config['num_spectra'],
-                    config['num_freqs'], config['speed']]
+    config_block = [config[config_name] for config_name in format.CONFIG_NAMES]
 
     encoded_channel_data = []
     for channel_num, spectra in enumerate(spectra_channels):

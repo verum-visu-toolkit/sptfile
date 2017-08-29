@@ -22,6 +22,8 @@ def unpack(sptfile_data):
     for name in ['num_channels', 'num_spectra', 'num_freqs']:
         config[name] = int(config[name])
 
+    config['peak'] = float(config['peak'])
+
     channels = _structure_flat_channels_data(body=body, config=config)
     spt = create_spt(spectra_channels=channels, config=config)
     return spt
@@ -41,11 +43,11 @@ def _unpack_raw_sptfile(sptfile_data):
     header_fmt_str_block_len = int(first_numbers.match(sptfile_data).group(0))
     header_fmt_str = sptfile_data[:header_fmt_str_block_len].strip()
     header = struct.unpack_from(header_fmt_str, sptfile_data)
+    config_vals = header[header_fmt_str_block_len + 3:]  # SPT is 3 chars long
+
     config = {
-        'num_channels': header[-4],
-        'num_spectra': header[-3],
-        'num_freqs': header[-2],
-        'speed': header[-1]
+        config_name: config_vals[i] if i < len(config_vals) else None
+        for i, config_name in enumerate(format.CONFIG_NAMES)
     }
 
     body_fmt_str = format.get_body_fmt_str(config)

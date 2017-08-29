@@ -1,4 +1,6 @@
-# SPT Binary file type: Writing/Reading
+"""SPT Binary file format"""
+
+CONFIG_NAMES = ['num_channels', 'num_spectra', 'num_freqs', 'speed', 'peak']
 
 # here, we encode the header with lengths and binary types; e.g. '4c' means a
 #  block of 4 characters, representing the header (see python struct lib)
@@ -18,7 +20,7 @@
 #   3. num frequencies per spectrum
 #   4. read rate
 # padding: 8 empty bytes
-HEADER_FMT_STR = '12c3cx4f8x'
+HEADER_FMT_STR = '12c3cx{:d}f8x'.format(len(CONFIG_NAMES))
 # the header will embed the string with fixed length
 SPT_FILE_FMT_STR_BLOCK = HEADER_FMT_STR + ' ' * (12 - len(HEADER_FMT_STR))
 
