@@ -1,12 +1,12 @@
 import struct
 import format
-from vvanalyzer import cli
+# from vvanalyzer import cli
 
-pbar = cli.ProgressBarController()
+# pbar = cli.ProgressBarController()
 
 
 def pack(spectra_channels=None, config=None):
-    pbar.start('Generating an SPT file', show_header=True)
+    # pbar.start('Generating an SPT file', show_header=True)
 
     fmt_str_block = list(format.SPT_FILE_FMT_STR_BLOCK)
     name_str = list('SPT')
@@ -15,7 +15,7 @@ def pack(spectra_channels=None, config=None):
     encoded_channel_data = []
     for channel_num, spectra in enumerate(spectra_channels):
 
-        pbar.start('Channel {:d}'.format(channel_num))
+        # pbar.start('Channel {:d}'.format(channel_num))
 
         encoded_channel_data += list('channel%d' % channel_num)
 
@@ -25,9 +25,9 @@ def pack(spectra_channels=None, config=None):
             for value in values:
                 encoded_channel_data.append(value)
 
-            pbar.set_progress(num_spectrum, num_spectra - 1)
+            # pbar.set_progress(num_spectrum, num_spectra - 1)
 
-        pbar.end()
+        # pbar.end()
 
     body_fmt_str = format.get_body_fmt_str(config)
     full_fmt_str = format.HEADER_FMT_STR + body_fmt_str
@@ -36,7 +36,7 @@ def pack(spectra_channels=None, config=None):
 
     file_data_packed = struct.pack(full_fmt_str, *file_data)
 
-    pbar.end(show_header=True)
+    # pbar.end(show_header=True)
 
     return file_data_packed
 
